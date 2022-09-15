@@ -16,4 +16,8 @@ public class Key
 		SoundThread s = new SoundThread(pitch, midiChannel); // pass in pitch to play
 		s.start();
 	}
+
+	public int getPitch() {
+		return pitch;
+	}
 }

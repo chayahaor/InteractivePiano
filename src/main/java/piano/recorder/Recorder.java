@@ -1,5 +1,6 @@
 package piano.recorder;
 
+import piano.keyboard.keyboardaudio.Key;
 import piano.keyboard.keyboardui.PianoLabel;
 
 import javax.sound.midi.*;
@@ -10,6 +11,7 @@ public class Recorder {
     private ArrayList<KeyPressedInfo> recordedKeysInfo = new ArrayList<>();
     private boolean isRecording;
     private Sequence sequence;
+    private MidiChannel midiChannel;
 
 
     public void append(PianoLabel labelPressed, long timePressed) {
@@ -71,21 +73,25 @@ public class Recorder {
             Synthesizer synthesizer = MidiSystem.getSynthesizer();
             synthesizer.open();
             Track currTrack = sequence.createTrack();
-            for (int i = 5; i < (4 * 20) + 5; i += 4)
-            {
+            int numNotes = getRecordedKeysInfo().size();
 
+            for (int i = 0; i < numNotes; i++)
+            {
                 // Add Note On event
-                currTrack.add(makeASong(144, 1, i, 100, i));
+                int note=getRecordedKeysInfo().get(i).getLabelPressed().getKey();
+                currTrack.add(makeASong(144, 1, note, 100, i));
 
                 // Add Note Off event
-                currTrack.add(makeASong(128, 1, i, 100, i + 2));
+                //currTrack.add(makeASong(128, 1, i, 100, i + 2));
             }
 
+            //Key labelPressed = recordedKeysInfo.get(0).getKey();
 
             sequencer.setSequence(sequence);
             sequencer.setTempoInBPM(120);
             int[] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
             MidiSystem.write(sequence, allowedTypes[0], new File("C:\\temp\\o.mid"));
+
         } catch (Exception e)
         {
             e.printStackTrace();
