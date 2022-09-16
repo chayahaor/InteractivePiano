@@ -1,5 +1,6 @@
 package piano.recorder;
 
+import piano.SaveAudio.SaveOption;
 import piano.main.MainFrameInterface;
 import javax.swing.*;
 import java.awt.*;

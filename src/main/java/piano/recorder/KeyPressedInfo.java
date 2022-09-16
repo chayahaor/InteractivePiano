@@ -2,18 +2,18 @@ package piano.recorder;
 
 import piano.keyboard.keyboardui.PianoLabel;
 
-class KeyPressedInfo
+public class KeyPressedInfo
 {
     private PianoLabel labelPressed;
     private long timeWhenPressed;
 
-    KeyPressedInfo(PianoLabel labelPressed, long timeWhenPressed)
+    public KeyPressedInfo(PianoLabel labelPressed, long timeWhenPressed)
     {
         this.labelPressed = labelPressed;
         this.timeWhenPressed = timeWhenPressed;
     }
 
-    PianoLabel getLabelPressed()
+    public PianoLabel getLabelPressed()
     {
         return labelPressed;
     }
