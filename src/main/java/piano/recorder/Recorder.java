@@ -3,13 +3,11 @@ package piano.recorder;
 import piano.SaveAudio.SaveOption;
 import piano.keyboard.keyboardui.PianoLabel;
 
-import javax.sound.midi.Sequence;
 import java.util.ArrayList;
 
 public class Recorder {
     private ArrayList<KeyPressedInfo> recordedKeysInfo = new ArrayList<>();
     private boolean isRecording;
-    private SaveOption saveOption;
 
 
     public void append(PianoLabel labelPressed, long timePressed) {
@@ -42,7 +40,7 @@ public class Recorder {
             }
             labelPressed.setColorToDefaultColor();
         }
-        saveOption = new SaveOption(getRecordedKeysInfo());
+        new SaveOption(getRecordedKeysInfo());
 
     }
 
