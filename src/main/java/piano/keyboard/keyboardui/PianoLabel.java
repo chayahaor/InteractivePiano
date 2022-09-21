@@ -44,7 +44,7 @@ public class PianoLabel extends JLabel
 		key.play();
 	}
 
-	public int getKey() {
+	public int getPitch() {
 		return key.getPitch();
 	}
 }

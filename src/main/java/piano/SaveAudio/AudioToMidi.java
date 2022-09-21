@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class AudioToMidi {
 
-    ArrayList<KeyPressedInfo> recordedKeysInfo;
-    File location;
-    int instrumentNum;
+    private ArrayList<KeyPressedInfo> recordedKeysInfo;
+    private File location;
+    private int instrumentNum;
 
     public AudioToMidi(ArrayList<KeyPressedInfo> getRecordedKeysInfo, File locationToSave) {
         location = locationToSave;
@@ -18,7 +18,7 @@ public class AudioToMidi {
         writeMidiFile();
     }
 
-    public void writeMidiFile() {
+    private void writeMidiFile() {
         try
         {
             Sequence sequence = new Sequence(Sequence.PPQ, 4);
@@ -31,7 +31,7 @@ public class AudioToMidi {
 
             for (int i = 0; i < numNotes; i++)
             {
-                int note = recordedKeysInfo.get(i).getLabelPressed().getKey();
+                int note = recordedKeysInfo.get(i).getLabelPressed().getPitch();
                 // Add Note On event - Command 144 is to play a note.
                 currTrack.add(makeASong(144, instrumentNum, note, 120, i));
             }
@@ -50,7 +50,7 @@ public class AudioToMidi {
         }
     }
 
-    public MidiEvent makeASong(int command, int channel,
+    private MidiEvent makeASong(int command, int channel,
                                int note, int velocity, int tick) {
         MidiEvent event = null;
         try
