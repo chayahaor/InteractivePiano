@@ -21,6 +21,7 @@ public class Intro {
             channel.noteOn(Notes.C, SoundSettings.VOLUME);
             channel.noteOn(Notes.E, SoundSettings.VOLUME);
             channel.noteOn(Notes.G, SoundSettings.VOLUME);
+            channel.noteOn(Notes.C + 12, SoundSettings.VOLUME);
             Thread.sleep(3000);
             channel.allNotesOff();
             Thread.sleep(500);

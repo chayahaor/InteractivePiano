@@ -6,7 +6,10 @@ import piano.main.MainFrameInterface;
 import piano.recorder.Recorder;
 import javax.sound.midi.MidiChannel;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Keyboard extends JLayeredPane {
     private Colors colors;
@@ -14,6 +17,7 @@ public class Keyboard extends JLayeredPane {
     private Recorder recorder;
     private final int BACK_LAYER = 0;
     private final int FRONT_LAYER = 1;
+    private List<PianoLabel> pianoLabelList = new ArrayList<>();
 
     public Keyboard(MidiChannel midiChannel, Recorder recorder) {
         this.midiChannel = midiChannel;
@@ -29,8 +33,16 @@ public class Keyboard extends JLayeredPane {
 
     private void addWhitePianoLabels() {
         int placement = KeyStats.SPACE_BETWEEN_WHITE_KEYS;
-
         int index = 0;
+
+        addPianoLabel(Color.WHITE, index, placement);
+        placement += KeyStats.WHITE_WIDTH + KeyStats.SPACE_BETWEEN_WHITE_KEYS;
+        index += 2;
+
+        addPianoLabel(Color.WHITE, index, placement);
+        placement += KeyStats.WHITE_WIDTH + KeyStats.SPACE_BETWEEN_WHITE_KEYS;
+        index++;
+
         for (int octave = 0; octave < KeyStats.OCTAVES; octave++) {
             for (int whiteKey = 0; whiteKey < KeyStats.NUM_WHITE_KEYS_IN_OCTAVE; whiteKey++) {
                 addPianoLabel(Color.WHITE, index, placement);
@@ -44,11 +56,15 @@ public class Keyboard extends JLayeredPane {
                 }
             }
         }
+        addPianoLabel(Color.WHITE, index, placement);
     }
 
     private void addBlackPianoLabels() {
         int placement = KeyStats.FIRST_BLACK;
         int index = 1;
+        addPianoLabel(Color.BLACK, index, placement);
+        placement += KeyStats.BLACK_WIDTH + KeyStats.BIG_SPACE_BETWEEN_BLACK_KEYS;
+        index +=3;
         for (int octave = 0; octave < KeyStats.OCTAVES; octave++) {
             for (int blackKey = 0; blackKey < KeyStats.NUM_BLACK_KEYS_IN_OCTAVE; blackKey++) {
                 addPianoLabel(Color.BLACK, index, placement);
@@ -74,7 +90,17 @@ public class Keyboard extends JLayeredPane {
         } else {
             setLayer(pianoLabel, FRONT_LAYER);
         }
-
+        if(index==39){
+            pianoLabel.setText("•");
+            pianoLabel.setVerticalAlignment(JLabel.BOTTOM);
+            pianoLabel.setBorder(new EmptyBorder(0, 0, 20, 0));
+            pianoLabel.setFont(new Font("Serif", Font.BOLD, 20));
+            pianoLabel.setForeground(color.RED);
+        }
         add(pianoLabel);
+        pianoLabelList.add(pianoLabel);
+    }
+    public List<PianoLabel> getPianoLabelList() {
+        return pianoLabelList;
     }
 }

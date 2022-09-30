@@ -4,7 +4,7 @@ import piano.main.MainFrameInterface;
 
 public interface KeyStats
 {
-	int OCTAVES = 3;
+	int OCTAVES = 7;
 	int OCTAVE_WIDTH = MainFrameInterface.KEYBOARD_WIDTH / OCTAVES;
 
 	int NUM_WHITE_KEYS_IN_OCTAVE = 7;
